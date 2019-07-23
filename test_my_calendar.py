@@ -21,6 +21,7 @@ class TestCalendar(unittest.TestCase):
     def setUp(self):
         self.weekday = datetime.datetime(year=2019, month=1, day=1)
         self.weekend = datetime.datetime(year=2019, month=1, day=5)
+        
     #==================================================================
     # is_weekday tests
     
