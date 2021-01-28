@@ -21,8 +21,10 @@ class TestCalendar(unittest.TestCase):
     def setUp(self):
         self.weekday = datetime.datetime(year=2019, month=1, day=1)
         self.weekend = datetime.datetime(year=2019, month=1, day=5)
+        
     #==================================================================
     # is_weekday tests
+    
     @patch('my_calendar.datetime')
     def test_is_weekday_true_false(self, mock_date):
         '''test is_weekday() returns true on weekdays and false on weekends'''
