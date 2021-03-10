@@ -176,8 +176,15 @@ def isValidWord(word, hand, wordList):
     hand: dictionary (string -> int)
     wordList: list of lowercase strings
     """
-    # TO DO ... <-- Remove this comment when you code this function
 
+    # check hand contains enough of each letter in word
+    word_dict = getFrequencyDict(word)
+    word_letters = list(word_dict.keys())
+    for letter in word_letters: 
+        if hand.get(letter,0) < word_dict.get(letter,0):
+            return False
+
+    return word in wordList 
 
 #
 # Problem #4: Playing a hand
@@ -190,7 +197,7 @@ def calculateHandlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    # TO DO... <-- Remove this comment when you code this function
+    return sum(list(hand.values()))
 
 
 
@@ -216,35 +223,36 @@ def playHand(hand, wordList, n):
       n: integer (HAND_SIZE; i.e., hand size required for additional points)
       
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Keep track of the total score
-    
+    total_score = 0
+    exit_msg = 'Run out of letters. '
+
     # As long as there are still letters left in the hand:
-    
+    while(calculateHandlen(hand)):
         # Display the hand
-        
+        displayHand(hand)
         # Ask user for input
-        
+        word = input('Enter word, or a "." to indicate that you are finished: ')
         # If the input is a single period:
-        
+        if word == '.':
             # End the game (break out of the loop)
-
-            
+            exit_msg = 'Goodbye! '
+            break
         # Otherwise (the input is not a single period):
-        
-            # If the word is not valid:
-            
-                # Reject invalid word (print a message followed by a blank line)
-
+        # If the word is not valid:
+        elif not isValidWord(word, hand, wordList):
+            # Reject invalid word (print a message followed by a blank line)
+            print('Invalid word, please try again.\n')
             # Otherwise (the word is valid):
-
+        else: 
+            this_words_score = getWordScore(word, n)
+            total_score += this_words_score
                 # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
-                
+            print('"' + word + '"' + " earned %i points. Total: %i points\n"%(this_words_score, total_score))
                 # Update the hand 
-                
-
+            hand = updateHand(hand, word)
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
-
+    print(exit_msg + 'Total score: %i points.'%(total_score))
 
 #
 # Problem #5: Playing a game
@@ -262,9 +270,26 @@ def playGame(wordList):
  
     2) When done playing the hand, repeat from step 1    
     """
-    # TO DO ... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this line when you code the function
-   
+    user_input = ''
+    hand = {}
+    while user_input != 'e':
+        user_input = input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
+        # Check command valid
+        if user_input not in('e', 'r', 'n'):
+            print('Invalid command.\n')
+        # Handle valid commands
+        elif user_input == 'n':
+            hand = dealHand(HAND_SIZE)
+            playHand(hand, wordList, HAND_SIZE)
+        elif user_input == 'r':
+            if len(hand) == 0:
+                print('You have not played a hand yet. Please play a new hand first!\n')
+            else:
+                playHand(hand, wordList, HAND_SIZE)
+        else:
+            pass
+                
+       
 
 
 

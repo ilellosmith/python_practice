@@ -185,6 +185,38 @@ def test_isValidWord(wordList):
     if not failure:
         print("SUCCESS: test_isValidWord()")
 
+def test_calculateHandlen():
+    """
+    Unit test for calculateHandlen
+    """
+    failure=False
+    
+    hand1 = {'e':1, 'v':2, 'n':1, 'i':1, 'l':2}
+
+    result1 = calculateHandlen(hand1)
+    if result1 != 7:
+        print("FAILURE: test_calculateHandlen()")
+        print("\tExpected length", 7 , "but got" + str(result1) + "for hand" + hand1)
+        failure=True
+        
+    hand2 = {}
+
+    result2 = calculateHandlen(hand2)
+    if result2 != 0:
+        print("FAILURE: test_calculateHandlen()")
+        print("\tExpected length", 7 , "but got" + str(result2) + "for hand" + hand2)
+        failure=True
+        
+    hand3 = {'z':0}
+
+    result3 = calculateHandlen(hand3)
+    if result3 != 0:
+        print("FAILURE: test_calculateHandlen()")
+        print("\tExpected length", 7 , "but got" + str(result3) + "for hand" + hand3)
+        failure=True
+        
+    if not failure:
+        print("SUCCESS: test_getWordScore()")
 
 wordList = loadWords()
 print("----------------------------------------------------------------------")
@@ -202,4 +234,20 @@ print("----------------------------------------------------------------------")
 print("Testing isValidWord...")
 test_isValidWord(wordList)
 print("----------------------------------------------------------------------")
+print('Testing calculateHandlen...')
+test_calculateHandlen()
+print("----------------------------------------------------------------------")
+# print('Testing playHand once...')
+# playHand({'h':1, 'i':1, 'c':1, 'z':1, 'm':2, 'a':1}, wordList, 7)
+# print("----------------------------------------------------------------------")
+# print('Testing playHand twice...')
+# playHand({'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}, wordList, 7)
+# print("----------------------------------------------------------------------")
+# print('Testing playHand thrice...')
+# playHand({'n':1, 'e':1, 't':1, 'a':1, 'r':1, 'i':2}, wordList, 7)
+# print("----------------------------------------------------------------------")
+print('Testing playHand a fourth time...')
+playHand({'n':2, 'u':1}, wordList, 3)
+print("----------------------------------------------------------------------")
 print("All done!")
+
