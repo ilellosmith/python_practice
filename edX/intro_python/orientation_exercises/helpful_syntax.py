@@ -97,8 +97,7 @@ print('this does not throw a key error because the function returns the specifie
 # PROPERTIES
 # Properties for class definitions 
 # Helpful additional resource is here: https://www.python-course.eu/python3_properties.php
-# Useful if you want to QA input 
-
+# Useful if you want to QA input
 class SpeakerSettings(object):
     def __init__(self, volume, bass, treble):
         self.volume = volume
