@@ -221,3 +221,11 @@ class Rabbit(Animal):
         self.parent2 = parent2 
         self.rid = Rabbit.tag
         Rabbit.tag += 1
+
+# Range
+# ------------------
+# This outputs a single iteration. [start,stop)
+for i in range(0,1):
+    print(i)
+    
+    
